@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
-
 function App() {
+
+  const createDigits = () => {
+    const digits = [];
+    //generating buttons 1 - 9 without multiple button tags
+    for (let i = 1; i < 10; i++) {
+      digits.push(<button key={i}>{i}</button>)
+    }
+    return digits;
+  }
+
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='calc'>
+        <div className='display'>
+          <span>(0)</span>
+        </div>
+      </div>
+
+      <div className='ops'>
+        <button>/</button>
+        <button>*</button>
+        <button>+</button>
+        <button>-</button>
+        <button>DEL</button>
+      </div>
+
+      <div className='digits'>
+        { createDigits() } {/*calling function so #s can appear here*/}
+        <button>0</button>
+        <button>.</button>
+        <button>=</button>
+      </div>
+
     </div>
+
   );
 }
 
