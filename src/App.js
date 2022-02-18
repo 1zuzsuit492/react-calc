@@ -1,3 +1,7 @@
+import './index.css';
+import Big from 'big.js';
+
+
 function App() {
 
   const createDigits = () => {
