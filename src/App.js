@@ -1,47 +1,60 @@
-import './index.css';
-import Big from 'big.js';
+import { useState } from "react";
+import * as math from "mathjs"; //exporting everything with math from mathjs, ran npm i mathjs [google]
+import "./App.css";
+import Button from "./components/Button";
+import Input from "./components/Input";
 
+const App = () => {
+  const [digits, setDigits] = useState("");
+  const [result, setResult] = useState("");
 
-function App() {
+  const addNums = (nums) => {
+    setDigits((digits) => [...digits, nums + " "]);
+  };
 
-  const createDigits = () => {
-    const digits = [];
-    //generating buttons 1 - 9 without multiple button tags
-    for (let i = 1; i < 10; i++) {
-      digits.push(<button key={i}>{i}</button>)
-    }
-    return digits;
-  }
+  const calculateResult = () => {
+    const input = digits.join(""); // Remove commas
 
+    setResult(math.evaluate(input));
+  };
 
-
+  const resetInput = () => {
+    setDigits("");
+    setResult("");
+  };
 
   return (
     <div className="App">
-      <div className='calc'>
-        <div className='display'>
-          <span>(0)</span>
+      <div className="btn-bg">
+        <Input digits={digits} result={result} />
+        <div className="row">
+          <Button symbol="7" handleClick={addNums} />
+          <Button symbol="8" handleClick={addNums} />
+          <Button symbol="9" handleClick={addNums} />
+          <Button symbol="/" handleClick={addNums} />
         </div>
+        <div className="row">
+          <Button symbol="4" handleClick={addNums} />
+          <Button symbol="5" handleClick={addNums} />
+          <Button symbol="6" handleClick={addNums} />
+          <Button symbol="*" handleClick={addNums} />
+        </div>
+        <div className="row">
+          <Button symbol="1" handleClick={addNums} />
+          <Button symbol="2" handleClick={addNums} />
+          <Button symbol="3" handleClick={addNums} />
+          <Button symbol="+" handleClick={addNums} />
+        </div>
+        <div className="row">
+          <Button symbol="0" handleClick={addNums} />
+          <Button symbol="." handleClick={addNums} />
+          <Button symbol="=" handleClick={calculateResult} />
+          <Button symbol="-" handleClick={addNums} />
+        </div>
+        <Button symbol="Clear" color="red" handleClick={resetInput} />
       </div>
-
-      <div className='ops'>
-        <button>/</button>
-        <button>*</button>
-        <button>+</button>
-        <button>-</button>
-        <button>DEL</button>
-      </div>
-
-      <div className='digits'>
-        { createDigits() } {/*calling function so #s can appear here*/}
-        <button>0</button>
-        <button>.</button>
-        <button>=</button>
-      </div>
-
     </div>
-
   );
-}
+};
 
 export default App;
